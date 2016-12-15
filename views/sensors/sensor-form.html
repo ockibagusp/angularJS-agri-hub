@@ -1,0 +1,25 @@
+<div nav-bar></div> 
+<div class="container">
+    <div breadcrumb title="{{ is_new ? 'New Sensor' : 'Edit Sensor' }}" links="links"></div>
+    <div class="row-fluid">
+        <div class="col-md-6">
+            <ul ng-repeat="error in errors">
+                <li style="color: red">{{ error.field}} -> {{ error.message }}</li>
+            </ul>
+            <form name="sensorForm" ng-submit="save()" class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label" for="label">Label:</label>
+                    <input ng-model="sensor.label" class="form-control" id="label" required>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-primary">Save</button>
+                    <button type="button" confirm-modal="delete()" rel="Are you sure to delete"
+                        object="Sensor" objectlabel="sensor.label" url="sensor.url" 
+                        redirecturl="/nodes/{{ node.id }}/sensors/index" ng-show="sensor.id"class="btn">
+                        Delete
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

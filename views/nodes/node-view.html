@@ -1,0 +1,42 @@
+<div nav-bar></div>
+<div class="container">
+	<div breadcrumb title="Node" links="links"></div> 
+    <div class="row-fluid">
+    	<h3>Node: {{ node.label }}</h3>
+    	<div class="col-md-4">
+		 	<table class="table table-striped">
+		    	<tbody>
+		    		<tr>
+		    			<th>Subscription per day:</th>
+		    			<td>{{node.subsperday}}</td>
+		    		</tr>
+		    		<tr>
+		    			<th>Subscription per day remaining:</th>
+		    			<td>{{ node.subsperdayremain }}</td>
+		    		</tr>
+		    		<tr>
+		    			<th>Sensor count:</th>
+		    			<td>{{ node.sensor_count }}</td>
+		    		</tr>
+		    		<tr>
+		    			<th>Sensor list:</th>
+		    			<td>
+		    				<a href="#/nodes/{{node.id}}/sensors/index">link</a>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<th>Subscriptions list:</th>
+		    			<td>
+		    				<a href="#/subscriptions/node/{{ node.id }}/index">link</a>
+		    			</td>
+		    		</tr>
+		    	</tbody>
+		  	</table>
+			<form ng-submit="edit()" class="form-horizontal">
+			    <div class="form-actions">
+			        <button class="btn btn-primary">Edit</button>
+			    </div>
+			</form>
+    	</div>
+    </div>
+</div>

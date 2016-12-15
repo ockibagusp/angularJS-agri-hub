@@ -1,0 +1,26 @@
+<div nav-bar></div> 
+<div class="container">
+	<div breadcrumb title="Sensor" links="links"></div> 
+    <div class="row-fluid">
+		<h3>Sensor: {{sensor.label}}</h3>
+		<div class="col-md-4">
+		 	<table class="table table-striped">
+		    	<tbody>
+		    		<tr>
+		    			<th>Subscription list:</th>
+		    			<td>
+							<a href="/#/subscriptions/node/{{ nodeid }}/sensor/{{ sensor.id }}/index">
+								Link
+							</a>
+						</td>
+		    		</tr>
+		    	</tbody>
+		 	</table>
+		</div>
+		<form ng-submit="edit()" class="form-horizontal">
+		    <div class="form-actions">
+		        <button class="btn btn-primary">Edit</button>
+		    </div>
+		</form>
+    </div>
+</div>

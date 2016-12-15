@@ -1,0 +1,25 @@
+<div nav-bar></div>
+<div class="container">
+	<div breadcrumb title="Node List" links="links"></div> 
+    <div class="row-fluid">
+        <div class="span10">
+			<h3>Node List</h3>
+			<ul class="nodes">
+			    <li ng-repeat="node in nodes.results">
+			        <div><a href="#/nodes/view/{{node.id}}">{{node.label}}</a></div>
+			    </li>
+			</ul>
+			<div class="alert alert-info" role="alert">
+				New node: <a href="#/nodes/new" class="btn btn-primary">Link</a>
+			</div>
+			<strong ng-hide="nodes.results.length">No Data</strong>
+			<h3>Subscriptions</h3>
+			<div class="alert alert-info" role="alert">
+				All subscriptions from any nodes and sensors:
+				<a href="#/subscriptions/index" class="btn btn-primary">
+				 	Link
+				</a>
+			</div>
+        </div>
+    </div>
+</div>

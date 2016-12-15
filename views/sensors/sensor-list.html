@@ -1,0 +1,19 @@
+<div nav-bar></div>
+<!-- {{ (sensors.results)[0].node }}  -->
+<div class="container">
+	<div breadcrumb title="Sensor List" links="links"></div> 
+    <div class="row-fluid">
+        <div class="span10">
+			<h3>Sensor List</h3>
+			<ul class="nodes">
+			    <li ng-repeat="sensor in sensors.results">
+			        <div><a href="#/nodes/{{ nodeid }}/sensors/view/{{ sensor.id }}">{{ sensor.label }}</a></div>
+			    </li>
+			</ul>
+			<strong ng-hide="sensors.results.length">No Data</strong>
+        </div>
+		<div class="alert alert-info" role="alert">
+			New sensor: <a href="#/nodes/{{ nodeid }}/sensors/new" class="btn btn-primary">Link</a>
+		</div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<div nav-bar></div>
+<div class="container">
+	<div breadcrumb title="Subscription" links="links"></div> 
+    <div class="row-fluid">
+        <div class="span10">
+			<h3>{{ node }} Subscriptions List</h3>
+			<div class="col-md-8">
+				<pre ng-hide="!subscriptions.results.length">Total: {{ totalItems }} | Page: {{ currentPage }} / {{ numPages }}</pre>
+			 	<table class="table table-striped">
+			 		<thead>
+			 			<tr>
+			 				<th>Node</th>
+			 				<th>Sensor</th>
+			 				<th>Data</th>
+			 				<th>Time</th>
+			 			</tr>
+			 		</thead>
+			 		<tbody>
+			 			<tr ng-repeat="subscription in subscriptions.results">
+			 				<td>{{ subscription.node }}</td>
+			 				<td>{{ subscription.sensorlabel }}</td>
+			 				<td>{{ subscription.data }}</td>
+			 				<td>{{ subscription.timestamp | date: 'medium' }}</td>
+			 			</tr>
+			 		</tbody>
+			 	</table>
+				<strong ng-hide="subscriptions.results.length">No Data</strong>
+				<ul uib-pagination total-items="totalItems" ng-model="currentPage"
+					ng-change="pageChanged()" max-size="maxSize" class="pagination-sm" 
+					boundary-links="true" num-pages="numPages" force-ellipses="true"
+					ng-hide="!subscriptions.results.length"></ul>
+		 	</div>
+        </div>
+    </div>
+</div>

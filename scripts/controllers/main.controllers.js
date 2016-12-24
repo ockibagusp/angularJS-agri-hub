@@ -16,7 +16,7 @@ app.controller('MainCtrl',
 );
 
 app.controller('LoginCtrl',
-    function($scope, $location, Login, setCreds, checkCreds) {
+    function($scope, $location, $window, Login, setCreds, checkCreds) {
         if (checkCreds.isAuth()) {
             $location.path('/nodes/index');
         }
@@ -40,7 +40,7 @@ app.controller('LoginCtrl',
                     if (undefined !== response.token) {
                         // console.log("Success:" + JSON.stringify(response));
                         setCreds(response);
-                        $location.path('/');
+                        $window.location.href = '/';
                     } else {
                         $scope.error = 'Login Failed';
                     }
@@ -55,8 +55,8 @@ app.controller('LoginCtrl',
 );
 
 app.controller('LogoutCtrl',
-    function($scope, $location, deleteCreds) {
+    function($scope, $window, deleteCreds) {
         deleteCreds();
-        $location.path('/login');
+        $window.location.href = '/#/login';
     }
 );

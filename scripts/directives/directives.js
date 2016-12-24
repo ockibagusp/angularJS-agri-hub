@@ -18,7 +18,10 @@ directives.directive('butterbar', ['$rootScope',
 directives.directive('navBar', function (getCreds) {
     return {
         restrict: 'A',
-        templateUrl: 'views/navbar.html'
+        templateUrl: 'views/navbar.html',
+        link: function (scope, element, attrs) {
+            scope.username = getCreds.user.username
+        }
     };
 });
 
@@ -27,10 +30,10 @@ directives.directive('breadcrumb', function (getCreds) {
         restrict: 'A',
         scope: {links: '='},
         templateUrl: 'views/breadcrumb.html',
-        link: function (scope, el, attrs) {
+        link: function (scope, element, attrs) {
             scope.title = attrs.title;
             scope.username = getCreds.user.username,
-                scope.role = getCreds.user.is_admin
+            scope.role = getCreds.user.is_admin
         }
     };
 });
@@ -54,8 +57,8 @@ directives.directive('confirmModal', ['$uibModal', 'Sensors', function ($uibModa
             'object': '@',
             'objectlabel': '='
         },
-        link: function (scope, elem, attrs) {
-            elem.on('click', function () {
+        link: function (scope, element, attrs) {
+            element.on('click', function () {
                 var modalInstance = $uibModal.open({
                     templateUrl: '/views/modal.html',
                     controller: ['$scope', '$uibModalInstance', '$location', 'text', 'url', 'redirecturl',

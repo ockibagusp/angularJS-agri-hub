@@ -40,6 +40,16 @@ app.controller('NodeEditCtrl',
     function($scope, $routeParams, $location, Nodes) {
         Nodes.get($routeParams.nodeId).success(function (data) {
             $scope.node = data;
+            $scope.unlimited = (-1 == data.subsperday);
+            $scope._initial_subsperday = data.subsperday;
+            $scope.limitchange = function() {
+                if ($scope.unlimited) {
+                    $scope.node.subsperday = -1;
+                } else {
+                    $scope.node.subsperday = (-1 == $scope._initial_subsperday) ? 0 : 
+                        $scope._initial_subsperday;
+                }
+            };
             // breadcrumb
             $scope.links = [
                 { label: "Home", url: "/#/" },
@@ -61,9 +71,16 @@ app.controller('NodeNewCtrl',
         $scope.is_new = true;
         $scope.node = {
             'user': getCreds.user.username,
-            'label': "LAB_1",
+            'label': "FILKOM_1",
             'secretkey': 'rahasia',
             'subsperday': 20
+        };
+        $scope.limitchange = function() {
+            if ($scope.unlimited) {
+                $scope.node.subsperday = -1;
+            } else {
+                $scope.node.subsperday = 0;
+            }
         };
         // breadcrumb
         $scope.links = [

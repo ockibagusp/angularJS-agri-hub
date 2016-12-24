@@ -8,11 +8,11 @@
 		    	<tbody>
 		    		<tr>
 		    			<th>Subscription per day:</th>
-		    			<td>{{node.subsperday}}</td>
+		    			<td>{{ -1 == node.subsperday ? "unlimited" : node.subsperday }}</td>
 		    		</tr>
 		    		<tr>
 		    			<th>Subscription per day remaining:</th>
-		    			<td>{{ node.subsperdayremain }}</td>
+		    			<td>{{ -1 == node.subsperday ? "unlimited" : node.subsperdayremain }}</td>
 		    		</tr>
 		    		<tr>
 		    			<th>Sensor count:</th>

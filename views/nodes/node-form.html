@@ -17,11 +17,9 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="subsperday">Subsperday:</label>
-                    <input ng-model="node.subsperday" class="form-control" id="subsperday" required>
-                </div>
-                <div class="form-group" ng-if="!is_new">
-                    <label class="control-label" for="subsperdayremain">Subsperday Remain:</label>
-                    <input ng-model="node.subsperdayremain" class="form-control" id="subsperdayremain" required>
+                    <input type="checkbox" ng-model="unlimited" ng-change="limitchange()"> Unlimited
+                    <input type="number" ng-model="node.subsperday" class="form-control" id="subsperday" 
+                        ng-show="!unlimited" required>
                 </div>
                 <div class="form-actions">
                     <button class="btn btn-primary">Save</button>

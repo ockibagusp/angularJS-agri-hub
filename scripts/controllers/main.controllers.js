@@ -40,7 +40,7 @@ app.controller('LoginCtrl',
                     if (undefined !== response.token) {
                         // console.log("Success:" + JSON.stringify(response));
                         setCreds(response);
-                        $window.location.href = '/';
+                        $window.location.href = '';
                     } else {
                         $scope.error = 'Login Failed';
                     }
@@ -57,6 +57,6 @@ app.controller('LoginCtrl',
 app.controller('LogoutCtrl',
     function($scope, $window, deleteCreds) {
         deleteCreds();
-        $window.location.href = '/#/login';
+        $window.location.href = '#/login';
     }
 );

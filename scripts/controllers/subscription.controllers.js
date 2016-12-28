@@ -20,7 +20,7 @@ app.controller('SubscriptionsListUserCtrl',
             };
             // breadcrumb
             $scope.links = [
-                { label: "Home", url: "/#/" },
+                { label: "Home", url: "#/" },
                 { label: "All Subscriptions", is_active: true}
             ];
         });
@@ -49,9 +49,9 @@ app.controller('SubscriptionsListNodeCtrl',
                 $scope.node = data.label;
                 // breadcrumb
                 $scope.links = [
-                    { label: "Home", url: "/#/" },
-                    { label: "Nodes", url: "/#/"},
-                    { label: data.label, url: "/#/nodes/view/" + data.id },
+                    { label: "Home", url: "#/" },
+                    { label: "Nodes", url: "#/"},
+                    { label: data.label, url: "#/nodes/view/" + data.id },
                     { label: "Subscriptions", is_active: true}
                 ];
             });
@@ -69,15 +69,15 @@ app.controller('SubscriptionsListNodeSensorCtrl',
             $scope._node = data;
             // breadcrumb
             $scope.links = [
-                { label: "Home", url: "/#/" },
-                { label: "Nodes", url: "/#/"},
-                { label: data.label, url: "/#/nodes/view/" + data.id },
-                { label: "Sensors", url: "/#/nodes/" + data.id + "/sensors/index" },
+                { label: "Home", url: "#/" },
+                { label: "Nodes", url: "#/"},
+                { label: data.label, url: "#/nodes/view/" + data.id },
+                { label: "Sensors", url: "#/nodes/" + data.id + "/sensors/index" },
             ];
             Sensors.get($routeParams.node, $routeParams.sensor).success(function(data) {
                 $scope.node = $scope._node.label + " (" + data.label + ")";
                 $scope.links.push(
-                    { label: data.label, url: "/#/nodes/" + $scope._node.id + 
+                    { label: data.label, url: "#/nodes/" + $scope._node.id + 
                         "/sensors/view/" + data.id
                     },
                     { label: "Subscriptions", is_active: true}

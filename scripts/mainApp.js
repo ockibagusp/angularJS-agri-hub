@@ -11,13 +11,13 @@ app.config(function($resourceProvider) {
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/', {
         controller: 'MainCtrl',
-        templateUrl: 'views/nodes/node-list.html'
+        template: ' '
     }).when('/login', {
         controller: 'LoginCtrl',
         templateUrl: 'views/loginForm.html'
     }).when('/logout', {
         controller: 'LogoutCtrl',
-        templateUrl: 'views/loginForm.html'
+        template: ' '
     })
     // Nodes
     .when('/nodes/index', {

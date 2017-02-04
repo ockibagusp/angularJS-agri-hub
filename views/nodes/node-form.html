@@ -18,7 +18,7 @@
                 <div class="form-group">
                     <label class="control-label" for="subsperday">Subsperday:</label>
                     <input type="checkbox" ng-model="unlimited" ng-change="limitchange()"> Unlimited
-                    <input type="number" min="0" ng-model="node.subsperday" class="form-control" id="subsperday" 
+                    <input type="number" min="-1" ng-model="node.subsperday" class="form-control" id="subsperday" 
                         ng-show="!unlimited" required>
                 </div>
                 <div class="form-actions">

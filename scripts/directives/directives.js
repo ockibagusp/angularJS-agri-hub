@@ -60,7 +60,7 @@ directives.directive('confirmModal', ['$uibModal', 'Sensors', function ($uibModa
         link: function (scope, element, attrs) {
             element.on('click', function () {
                 var modalInstance = $uibModal.open({
-                    templateUrl: '/views/modal.html',
+                    templateUrl: 'views/modal.html',
                     controller: ['$scope', '$uibModalInstance', '$location', 'text', 'url', 'redirecturl',
                         'object', 'objectlabel', 
                         function ($scope, $uibModalInstance, $location, text, url, redirecturl,

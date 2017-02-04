@@ -9,7 +9,7 @@ app.controller('NodeListCtrl',
 
         // breadcrumb
         $scope.links = [
-            { label: "Home", url: "/#/" , is_active: true}
+            { label: "Home", url: "#/" , is_active: true}
         ];
 
         Nodes.query().success(function (data) {
@@ -24,8 +24,8 @@ app.controller('NodeViewCtrl',
             $scope.node = data;
             // breadcrumb
             $scope.links = [
-                { label: "Home", url: "/#/" },
-                { label: "Nodes", url: "/#/"},
+                { label: "Home", url: "#/" },
+                { label: "Nodes", url: "#/"},
                 { label: data.label, is_active: true}
             ];
         });
@@ -52,16 +52,16 @@ app.controller('NodeEditCtrl',
             };
             // breadcrumb
             $scope.links = [
-                { label: "Home", url: "/#/" },
-                { label: "Nodes", url: "/#/"},
-                { label: data.label, url: "/#/nodes/view/" + data.id},
+                { label: "Home", url: "#/" },
+                { label: "Nodes", url: "#/"},
+                { label: data.label, url: "#/nodes/view/" + data.id},
                 { label: "Edit", is_active: true}
             ];
         });
         $scope.save = function() {
-            Nodes.save($scope.node).then(function() {
-                $location.path('/nodes/index');
-            });
+                Nodes.save($scope.node).then(function() {
+                    $location.path('/nodes/index');
+                });
         };
     }
 );
@@ -84,8 +84,8 @@ app.controller('NodeNewCtrl',
         };
         // breadcrumb
         $scope.links = [
-            { label: "Home", url: "/#/" },
-            { label: "Nodes", url: "/#/"},
+            { label: "Home", url: "#/" },
+            { label: "Nodes", url: "#/"},
             { label: "New", is_active: true}
         ];
         $scope.save = function() {

@@ -10,9 +10,9 @@ app.controller('SensorListCtrl',
         Nodes.get($routeParams.nodeId).success(function (data) {
             // breadcrumb
             $scope.links = [
-                { label: "Home", url: "/#/" },
-                { label: "Nodes", url: "/#/nodes/index"},
-                { label: data.label, url: "/#/nodes/view/" + data.id},
+                { label: "Home", url: "#/" },
+                { label: "Nodes", url: "#/nodes/index"},
+                { label: data.label, url: "#/nodes/view/" + data.id},
                 { label: "Sensors", is_active: true}
             ];
         });
@@ -29,14 +29,14 @@ app.controller('SensorViewCtrl',
             $scope.nodeid = data.id;
             // breadcrumb
             $scope.links = [
-                { label: "Home", url: "/#/" },
-                { label: "Nodes", url: "/#/nodes/index"},
-                { label: data.label, url: "/#/nodes/view/" + data.id}
+                { label: "Home", url: "#/" },
+                { label: "Nodes", url: "#/nodes/index"},
+                { label: data.label, url: "#/nodes/view/" + data.id}
             ];
             Sensors.get($routeParams.nodeId, $routeParams.sensorId).success(function (data) {
                 // breadcrumb
                 $scope.links.push(
-                    { label: "Sensors", url: "/#/nodes/" + $routeParams.nodeId + "/sensors/index"},
+                    { label: "Sensors", url: "#/nodes/" + $routeParams.nodeId + "/sensors/index"},
                     { label: data.label, is_active: true}
                 );
                 $scope.sensor = data;
@@ -56,10 +56,10 @@ app.controller('SensorNewCtrl',
             $scope.node = data;
             // breadcrumb
             $scope.links = [
-                { label: "Home", url: "/#/" },
-                { label: "Nodes", url: "/#/nodes/index"},
-                { label: data.label, url: "/#/nodes/view/" + data.id},
-                { label: "Sensors", url: "/#/nodes/" + data.id + "/sensors/index"},
+                { label: "Home", url: "#/" },
+                { label: "Nodes", url: "#/nodes/index"},
+                { label: data.label, url: "#/nodes/view/" + data.id},
+                { label: "Sensors", url: "#/nodes/" + data.id + "/sensors/index"},
                 { label: "New", is_active: true}
             ];
         });
@@ -88,14 +88,14 @@ app.controller('SensorEditCtrl',
             $scope.node = data;
             // breadcrumb
             $scope.links = [
-                { label: "Home", url: "/#/" },
-                { label: "Nodes", url: "/#/nodes/index"},
-                { label: data.label, url: "/#/nodes/view/" + data.id}
+                { label: "Home", url: "#/" },
+                { label: "Nodes", url: "#/nodes/index"},
+                { label: data.label, url: "#/nodes/view/" + data.id}
             ];
             Sensors.get($routeParams.nodeId, $routeParams.sensorId).success(function (data) {
                 // breadcrumb
                 $scope.links.push(
-                    { label: "Sensors", url: "/#/nodes/" + $routeParams.nodeId + "/sensors/index"},
+                    { label: "Sensors", url: "#/nodes/" + $routeParams.nodeId + "/sensors/index"},
                     { label: data.label, is_active: true}
                 );
                 $scope.sensor = data;

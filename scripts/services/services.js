@@ -1,8 +1,9 @@
 var services = angular.module('agrihub.services', ['ngResource']);
+var apiurl = 'http://localhost:8080';
 
 services.factory('Nodes', ['$http', 'getCreds',
     function ($http, getCreds) {
-        var baseurl = 'http://localhost:8080/nodes';
+        var baseurl = apiurl + '/nodes';
         var options = {headers: {'Authorization': 'JWT ' + getCreds.token }};
 
         return {
@@ -30,7 +31,7 @@ services.factory('Nodes', ['$http', 'getCreds',
 
 services.factory('Sensors', ['$http', 'getCreds',
     function ($http, getCreds) {
-        var basenodeurl = 'http://localhost:8080/nodes';
+        var basenodeurl = apiurl + '/nodes';
         var options = {headers: {'Authorization': 'JWT ' + getCreds.token }};
 
         return {
@@ -60,7 +61,7 @@ services.factory('Sensors', ['$http', 'getCreds',
 
 services.factory('Subscriptions', ['$http', 'getCreds',
     function ($http, getCreds) {
-        var basenodeurl = 'http://localhost:8080/subscriptions';
+        var basenodeurl = apiurl + '/subscriptions';
         var options = {headers: {'Authorization': 'JWT ' + getCreds.token }};
 
         return {
@@ -91,7 +92,7 @@ services.factory('Subscriptions', ['$http', 'getCreds',
 
 services.factory('Login', ['$resource',
     function($resource) {
-        return $resource("http://localhost:8080/user-auth/", {}, {
+        return $resource(apiurl + "/user-auth/", {}, {
             login: {method: 'POST', cache: false, isArray: false}            
         });
     }]

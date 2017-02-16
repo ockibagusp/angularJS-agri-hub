@@ -4,11 +4,41 @@
     <div class="row-fluid">
         <div class="col-md-12">
 			<h3>Node List</h3>
-			<ul class="nodes">
-			    <li ng-repeat="node in nodes.results">
-			        <div><a href="#/nodes/view/{{node.id}}">{{node.label}}</a></div>
-			    </li>
-			</ul>
+			<uib-tabset type="pills">
+			    <uib-tab heading="All" classes="btn-sm" select="tabChange('all')">
+			    	<ul class="nodes">
+					    <li ng-repeat="node in nodes.results">
+					        <div>
+					        	<a href="#/nodes/view/{{node.id}}">{{node.label}}</a>
+					        	<span class="label {{ node.is_public ? 'label-default' : 'label-primary' }}">
+                                    {{ node.is_public ? "public" : "private" }}
+                                </span>
+					        </div>
+					    </li>
+					</ul>
+			    </uib-tab>
+			    <uib-tab heading="Public" classes="btn-sm" select="tabChange('public')">
+			    	<ul class="nodes">
+					    <li ng-repeat="node in nodes.results">
+					        <div><a href="#/nodes/view/{{node.id}}">{{node.label}}</a></div>
+					    </li>
+					</ul>
+			    </uib-tab>
+			    <uib-tab heading="Private" classes="btn-sm" select="tabChange('private')">
+			    	<ul class="nodes">
+					    <li ng-repeat="node in nodes.results">
+					        <div><a href="#/nodes/view/{{node.id}}">{{node.label}}</a></div>
+					    </li>
+					</ul>
+			    </uib-tab>
+			    <uib-tab heading="Global" classes="btn-sm" select="tabChange('global')">
+			    	<ul class="nodes">
+					    <li ng-repeat="node in nodes.results">
+					        <div><a href="#/nodes/view/{{node.id}}">{{node.label}}</a></div>
+					    </li>
+					</ul>
+			    </uib-tab>
+			</uib-tabset>
 			<div class="alert alert-info" role="alert">
 				New node: <a href="#/nodes/new" class="btn btn-primary">Link</a>
 			</div>

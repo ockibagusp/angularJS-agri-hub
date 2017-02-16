@@ -19,8 +19,18 @@ services.factory('Nodes', ['$http', 'getCreds',
                     return $http.put(url, node, options);
                 }
             },
-            query: function () {
-                return $http.get(baseurl + '/', options);
+            query: function (role) {
+                var extraParam = "";
+
+                if ("public" == role) {
+                    extraParam += "?role=public";
+                } else if ("private" == role) {
+                    extraParam += "?role=private";
+                } else if ("global" == role) {
+                    extraParam += "?role=global";
+                }
+
+                return $http.get(baseurl + '/' + extraParam, options);
             },
             delete: function(nodeId) {
                 return $http.delete(baseurl + '/' + nodeId + '/', options);

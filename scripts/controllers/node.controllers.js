@@ -13,8 +13,13 @@ app.controller('NodeListCtrl',
             { label: "Nodes", is_active: true}
         ];
 
-        Nodes.query().success(function (data) {
-            $scope.nodes = data
+        Nodes.query("all").success(function (data) {
+            $scope.nodes = data;
+            $scope.tabChange = function(role) {
+                Nodes.query(role).success(function (data) {
+                    $scope.nodes = data;
+                });
+            }
         })
     }
 );

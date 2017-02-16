@@ -8,7 +8,7 @@ app.controller('MainCtrl',
         }
 
         if (checkCreds.isAdmin()) {
-            $location.path('/403');
+            $location.path('/users/index');
         } else if (checkCreds.isResearcher()) {
             $location.path('/nodes/index');
         }

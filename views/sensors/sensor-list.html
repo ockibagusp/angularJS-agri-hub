@@ -12,7 +12,7 @@
 			</ul>
 			<strong ng-hide="sensors.results.length">No Data</strong>
         </div>
-		<div class="alert alert-info" role="alert">
+		<div ng-show="is_mine" class="alert alert-info" role="alert">
 			New sensor: <a href="#/nodes/{{ nodeid }}/sensors/new" class="btn btn-primary">Link</a>
 		</div>
     </div>

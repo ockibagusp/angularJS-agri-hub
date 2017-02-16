@@ -1,20 +1,21 @@
 'use strict';
 
 app.controller('SensorListCtrl', 
-    function($scope, $routeParams, $location, Nodes, Sensors, checkCreds, $log) {
+    function($scope, $routeParams, $location, Nodes, Sensors, checkCreds, getCreds) {
         if (!checkCreds.isAuth()) {
             $location.path('/login');
             return;
         }
 
-        Nodes.get($routeParams.nodeId).success(function (data) {
+        Nodes.get($routeParams.nodeId).success(function (node) {
             // breadcrumb
             $scope.links = [
                 { label: "Home", url: "#/" },
                 { label: "Nodes", url: "#/nodes/index"},
-                { label: data.label, url: "#/nodes/view/" + data.id},
+                { label: node.label, url: "#/nodes/view/" + node.id},
                 { label: "Sensors", is_active: true}
             ];
+            $scope.is_mine = (node.user == getCreds.user.username);
         });
         Sensors.query($routeParams.nodeId).success(function (data) {
             $scope.sensors = data;
@@ -50,16 +51,20 @@ app.controller('SensorViewCtrl',
 );
 
 app.controller('SensorNewCtrl', 
-    function($scope, $routeParams, $location, Nodes, Sensors) {
+    function($scope, $routeParams, $location, Nodes, Sensors, getCreds) {
         $scope.is_new = true;
-        Nodes.get($routeParams.nodeId).success(function (data) {
-            $scope.node = data;
+        Nodes.get($routeParams.nodeId).success(function (node) {
+            $scope.node = node;
+            // raise 403 when node is not owned by this auth user
+            if (node.user != getCreds.user.username) {
+                $location.path('/403');
+            }
             // breadcrumb
             $scope.links = [
                 { label: "Home", url: "#/" },
                 { label: "Nodes", url: "#/nodes/index"},
-                { label: data.label, url: "#/nodes/view/" + data.id},
-                { label: "Sensors", url: "#/nodes/" + data.id + "/sensors/index"},
+                { label: node.label, url: "#/nodes/view/" + node.id},
+                { label: "Sensors", url: "#/nodes/" + node.id + "/sensors/index"},
                 { label: "New", is_active: true}
             ];
         });

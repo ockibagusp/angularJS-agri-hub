@@ -1,11 +1,15 @@
 <div nav-bar></div>
 <div class="container">
-	<div breadcrumb title="Node" links="links"></div> 
+	<div breadcrumb title="Node Detail" links="links"></div> 
     <div class="row-fluid">
     	<h3>Node: {{ node.label }}</h3>
     	<div class="col-md-4">
 		 	<table class="table table-striped">
 		    	<tbody>
+		    		<tr>
+                        <th>Public node:</th>
+                        <td>{{ 1 == node.is_public ? "yes" : "no" }}</td>
+                    </tr>
 		    		<tr>
 		    			<th>Subscription per day:</th>
 		    			<td>{{ -1 == node.subsperday ? "unlimited" : node.subsperday }}</td>

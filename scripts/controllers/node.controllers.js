@@ -9,7 +9,8 @@ app.controller('NodeListCtrl',
 
         // breadcrumb
         $scope.links = [
-            { label: "Home", url: "#/" , is_active: true}
+            { label: "Home", url: "#/" },
+            { label: "Nodes", is_active: true}
         ];
 
         Nodes.query().success(function (data) {
@@ -25,7 +26,7 @@ app.controller('NodeViewCtrl',
             // breadcrumb
             $scope.links = [
                 { label: "Home", url: "#/" },
-                { label: "Nodes", url: "#/"},
+                { label: "Nodes", url: "#/nodes/index"},
                 { label: data.label, is_active: true}
             ];
         });
@@ -42,6 +43,7 @@ app.controller('NodeEditCtrl',
             $scope.node = data;
             $scope.unlimited = (-1 == data.subsperday);
             $scope._initial_subsperday = data.subsperday;
+            $scope.node.is_public = $scope.node.is_public ? true : false;
             $scope.limitchange = function() {
                 if ($scope.unlimited) {
                     $scope.node.subsperday = -1;
@@ -53,24 +55,24 @@ app.controller('NodeEditCtrl',
             // breadcrumb
             $scope.links = [
                 { label: "Home", url: "#/" },
-                { label: "Nodes", url: "#/"},
+                { label: "Nodes", url: "#/nodes/index"},
                 { label: data.label, url: "#/nodes/view/" + data.id},
                 { label: "Edit", is_active: true}
             ];
         });
         $scope.save = function() {
-                Nodes.save($scope.node).then(function() {
-                    $location.path('/nodes/index');
-                });
+            $scope.node.is_public = $scope.node.is_public ? 1 : 0;
+            Nodes.save($scope.node).then(function() {
+                $location.path('/nodes/index');
+            });
         };
     }
 );
 
 app.controller('NodeNewCtrl',
-    function($scope, $location, Nodes, getCreds) {
+    function($scope, $location, Nodes) {
         $scope.is_new = true;
         $scope.node = {
-            'user': getCreds.user.username,
             'label': "FILKOM_1",
             'secretkey': 'rahasia',
             'subsperday': 20
@@ -85,10 +87,11 @@ app.controller('NodeNewCtrl',
         // breadcrumb
         $scope.links = [
             { label: "Home", url: "#/" },
-            { label: "Nodes", url: "#/"},
+            { label: "Nodes", url: "#/nodes/index"},
             { label: "New", is_active: true}
         ];
         $scope.save = function() {
+            $scope.node.is_public = $scope.node.is_public ? 1 : 0;
             Nodes.save($scope.node).then(
                 function(response) {
                     $location.path('/nodes/index');

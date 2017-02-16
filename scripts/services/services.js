@@ -1,5 +1,5 @@
 var services = angular.module('agrihub.services', ['ngResource']);
-var apiurl = 'http://localhost:8080';
+var apiurl = BASE_API_URL;
 
 services.factory('Nodes', ['$http', 'getCreds',
     function ($http, getCreds) {

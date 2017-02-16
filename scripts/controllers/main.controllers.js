@@ -55,8 +55,8 @@ app.controller('LoginCtrl',
 );
 
 app.controller('LogoutCtrl',
-    function($scope, $window, deleteCreds) {
+    function($scope, $location, deleteCreds) {
         deleteCreds();
-        $window.location.href = '#/login';
+        $location.path('/login');
     }
 );

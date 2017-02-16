@@ -70,10 +70,10 @@ app.config(['$routeProvider', function ($routeProvider) {
     })
     // HTTP exceptions
     .when('/403', {
-        templateUrl: 'views/exceptions/403.html'
+        templateUrl: 'views/exceptions/exception.html'
     })
     .when('/404', {
-        templateUrl: 'views/exceptions/404.html'
+        templateUrl: 'views/exceptions/exception.html'
     })
     .otherwise({redirectTo: '/404'});
 }]);

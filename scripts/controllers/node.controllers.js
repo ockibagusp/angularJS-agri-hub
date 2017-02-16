@@ -25,14 +25,15 @@ app.controller('NodeListCtrl',
 );
 
 app.controller('NodeViewCtrl',
-    function($scope, $routeParams, $location, Nodes) {
-        Nodes.get($routeParams.nodeId).success(function (data) {
-            $scope.node = data;
+    function($scope, $routeParams, $location, Nodes, getCreds) {
+        Nodes.get($routeParams.nodeId).success(function (node) {
+            $scope.node = node;
+            $scope.is_mine = (node.user == getCreds.user.username);
             // breadcrumb
             $scope.links = [
                 { label: "Home", url: "#/" },
                 { label: "Nodes", url: "#/nodes/index"},
-                { label: data.label, is_active: true}
+                { label: node.label, is_active: true}
             ];
         });
 
@@ -43,11 +44,16 @@ app.controller('NodeViewCtrl',
 );
 
 app.controller('NodeEditCtrl',
-    function($scope, $routeParams, $location, Nodes) {
-        Nodes.get($routeParams.nodeId).success(function (data) {
-            $scope.node = data;
-            $scope.unlimited = (-1 == data.subsperday);
-            $scope._initial_subsperday = data.subsperday;
+    function($scope, $routeParams, $location, Nodes, getCreds) {
+        Nodes.get($routeParams.nodeId).success(function (node) {
+            $scope.node = node;
+            // raise 403 when node is not owned by this auth user
+            if (node.user != getCreds.user.username) {
+                $location.path('/403');
+            }
+
+            $scope.unlimited = (-1 == node.subsperday);
+            $scope._initial_subsperday = node.subsperday;
             $scope.node.is_public = $scope.node.is_public ? true : false;
             $scope.limitchange = function() {
                 if ($scope.unlimited) {
@@ -61,7 +67,7 @@ app.controller('NodeEditCtrl',
             $scope.links = [
                 { label: "Home", url: "#/" },
                 { label: "Nodes", url: "#/nodes/index"},
-                { label: data.label, url: "#/nodes/view/" + data.id},
+                { label: node.label, url: "#/nodes/view/" + node.id},
                 { label: "Edit", is_active: true}
             ];
         });

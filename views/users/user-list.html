@@ -4,14 +4,28 @@
     <div class="row-fluid">
         <div class="col-md-12">
 			<h3>User List</h3>
-			<ul class="nodes">
-			    <li ng-repeat="user in users.results">
-			        <div>
-			        	<a href="#/users/view/{{user.id}}">{{user.username}}</a>
-			        </div>
-			    </li>
-			</ul>
-			<strong ng-show="nodes.results.length == 0">No Data</strong>
+			<uib-tabset type="pills">
+			    <uib-tab heading="Admin" classes="btn-sm" select="tabChange('admin')">
+			    	<ul class="users">
+					    <li ng-repeat="user in users.results">
+					        <div>
+					        	<a href="#/users/view/{{user.id}}">{{user.username}}</a>
+					        </div>
+					    </li>
+					</ul>
+					<strong ng-show="users.results.length == 0">No Data</strong>
+			    </uib-tab>
+			    <uib-tab heading="Researcher" classes="btn-sm" select="tabChange('researcher')">
+			    	<ul class="users">
+					    <li ng-repeat="user in users.results">
+					        <div>
+					        	<a href="#/users/view/{{user.id}}">{{user.username}}</a>
+					        </div>
+					    </li>
+					</ul>
+					<strong ng-show="users.results.length == 0">No Data</strong>
+			    </uib-tab>
+			</uib-tabset>
 			<div class="alert alert-info" role="alert">
 				New user: <a href="#/users/new" class="btn btn-primary">Link</a>
 			</div>

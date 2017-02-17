@@ -119,8 +119,15 @@ services.factory('Users', ['$http', 'getCreds',
                     return $http.put(url, user, options);
                 }
             },
-            query: function() {
-                return $http.get(baseurl + '/', options);
+            query: function(type) {
+                var extraParam = "";
+
+                if ("admin" == type) {
+                    extraParam += "?type=admin";
+                } else if ("researcher" == type) {
+                    extraParam += "?type=researcher";
+                } 
+                return $http.get(baseurl + '/' + extraParam, options);
             }
         } 
     }]

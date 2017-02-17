@@ -7,13 +7,19 @@ app.controller('UserListCtrl',
         	return;
     	}
 
-    	Users.query().success(function(users) {
+        // breadcrumb
+        $scope.links = [
+            { label: "Home", url: "#/" },
+            { label: "Users", is_active: true}
+        ];
+
+    	Users.query("admin").success(function(users) {
     		$scope.users = users;
-    		// breadcrumb
-            $scope.links = [
-                { label: "Home", url: "#/" },
-                { label: "Users", is_active: true}
-            ];
+            $scope.tabChange = function(type) {
+                Users.query(type).success(function (users) {
+                    $scope.users = users;
+                });
+            }
     	});
 	}
 );

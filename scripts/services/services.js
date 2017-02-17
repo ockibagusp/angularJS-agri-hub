@@ -100,6 +100,32 @@ services.factory('Subscriptions', ['$http', 'getCreds',
     }]
 );
 
+
+services.factory('Users', ['$http', 'getCreds',
+    function ($http, getCreds) {
+        var baseurl = apiurl + '/users';
+        var options = {headers: {'Authorization': 'JWT ' + getCreds.token }};
+
+        return {
+            get: function(userId) {
+                return $http.get(baseurl + '/' + userId + '/', options);
+            },
+            save: function(user) {
+                var url = user.id ? baseurl + '/' + user.id + '/': baseurl + '/';
+
+                if (url == baseurl + '/') {
+                    return $http.post(url, user, options);
+                } else {
+                    return $http.put(url, user, options);
+                }
+            },
+            query: function() {
+                return $http.get(baseurl + '/', options);
+            }
+        } 
+    }]
+);
+
 services.factory('Login', ['$resource',
     function($resource) {
         return $resource(apiurl + "/user-auth/", {}, {

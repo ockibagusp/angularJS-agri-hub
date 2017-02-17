@@ -1,0 +1,51 @@
+<div nav-bar></div> 
+<div class="container">
+    <div breadcrumb title="{{ is_new ? 'New User' : 'Edit User' }}" links="links"></div>
+    <div class="row-fluid">
+        <div class="col-md-6">
+            <ul ng-repeat="error in errors">
+                <li style="color: red">{{ error.field}} -> {{ error.message }}</li>
+            </ul>
+            <form name="userForm" ng-submit="save()" class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-username" for="username">Username:</label>
+                    <input ng-model="user.username" class="form-control" name="username" 
+                        placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <label class="control-password" for="password">Password:</label>
+                    <input ng-model="user.password" class="form-control" name="password" type="password" 
+                        placeholder="Password" ng-required="!user.id">
+                </div>
+                <div class="form-group">
+                    <label class="control-email" for="email">Email:</label>
+                    <input ng-model="user.email" class="form-control" name="email" type="text" 
+                        placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <label class="control-first_name" for="first_name">First Name:</label>
+                    <input ng-model="user.first_name" class="form-control" name="first_name" type="text"
+                        placeholder="First Name">
+                </div>
+                <div class="form-group">
+                    <label class="control-last_name" for="last_name">Last Name:</label>
+                    <input ng-model="user.last_name" class="form-control" name="last_name" type="text"
+                        placeholder="Last Name">
+                </div>
+                <div class="form-group">
+                    <label class="control-is_admin" for="is_admin">Is Admin:</label>
+                    <input type="checkbox" ng-model="user.is_admin" name="is_admin"> 
+                    {{ 1 == user.is_admin ? "Yes" : "No" }}
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-primary">Save</button>
+                    <button type="button" confirm-modal="delete()" rel="Are you sure to delete"
+                        object="User" objectlabel="user.username" url="user.url" 
+                        redirecturl="/users/index" ng-show="user.id"class="btn">
+                        Delete
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

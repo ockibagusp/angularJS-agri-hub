@@ -1,0 +1,20 @@
+<div nav-bar></div>
+<div class="container">
+	<div breadcrumb title="User List" links="links"></div> 
+    <div class="row-fluid">
+        <div class="col-md-12">
+			<h3>User List</h3>
+			<ul class="nodes">
+			    <li ng-repeat="user in users.results">
+			        <div>
+			        	<a href="#/users/view/{{user.id}}">{{user.username}}</a>
+			        </div>
+			    </li>
+			</ul>
+			<strong ng-show="nodes.results.length == 0">No Data</strong>
+			<div class="alert alert-info" role="alert">
+				New user: <a href="#/users/new" class="btn btn-primary">Link</a>
+			</div>
+        </div>
+    </div>
+</div>

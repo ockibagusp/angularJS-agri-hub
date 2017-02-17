@@ -19,6 +19,23 @@ app.config(['$routeProvider', function ($routeProvider) {
         controller: 'LogoutCtrl',
         template: ' '
     })
+    // users
+    .when('/users/index', {
+        controller: 'UserListCtrl',
+        templateUrl: 'views/users/user-list.html'
+    })
+    .when('/users/edit/:userId', {
+        controller: 'UserEditCtrl',
+        templateUrl: 'views/users/user-form.html'
+    })
+    .when('/users/view/:userId', {
+        controller: 'UserViewCtrl',
+        templateUrl: 'views/users/user-view.html'
+    })
+    .when('/users/new', {
+        controller: 'UserNewCtrl',
+        templateUrl: 'views/users/user-form.html'
+    })
     // Nodes
     .when('/nodes/index', {
         controller: 'NodeListCtrl',

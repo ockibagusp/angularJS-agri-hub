@@ -87,9 +87,17 @@ app.config(['$routeProvider', function ($routeProvider) {
     })
     // HTTP exceptions
     .when('/403', {
+        controller: function ($scope) {
+            $scope.status = '403 Forbidden';
+            $scope.detail = 'You do not have permission to perform this action';
+        },
         templateUrl: 'views/exceptions/exception.html'
     })
     .when('/404', {
+        controller: function ($scope) {
+            $scope.status = '404 Not Found';
+            $scope.detail = 'Requested page not found';
+        },
         templateUrl: 'views/exceptions/exception.html'
     })
     .otherwise({redirectTo: '/404'});

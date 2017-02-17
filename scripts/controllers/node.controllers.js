@@ -13,9 +13,13 @@ app.controller('NodeListCtrl',
             { label: "Nodes", is_active: true}
         ];
 
-        Nodes.query("all").success(function (data) {
+        $scope.active = $location.search().visibility || 'all';
+        $location.search('visibility', $scope.active);
+
+        Nodes.query($scope.active).success(function (data) {
             $scope.nodes = data;
             $scope.tabChange = function(role) {
+                $location.search('visibility', role);
                 Nodes.query(role).success(function (data) {
                     $scope.nodes = data;
                 });

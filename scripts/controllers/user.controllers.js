@@ -13,9 +13,13 @@ app.controller('UserListCtrl',
             { label: "Users", is_active: true}
         ];
 
-    	Users.query("admin").success(function(users) {
+        $scope.active = $location.search().type || 'admin';
+        $location.search('type', $scope.active);
+
+    	Users.query($scope.active).success(function(users) {
     		$scope.users = users;
             $scope.tabChange = function(type) {
+                $location.search('type', type);
                 Users.query(type).success(function (users) {
                     $scope.users = users;
                 });

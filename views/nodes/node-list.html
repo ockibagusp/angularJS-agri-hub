@@ -4,8 +4,8 @@
     <div class="row-fluid">
         <div class="col-md-12">
 			<h3>Node List</h3>
-			<uib-tabset type="pills">
-			    <uib-tab heading="All" classes="btn-sm" select="tabChange('all')">
+			<uib-tabset type="pills" active="active">
+			    <uib-tab index="'all'" heading="All" classes="btn-sm" select="tabChange('all')">
 			    	<ul class="nodes">
 					    <li ng-repeat="node in nodes.results">
 					        <div>
@@ -18,7 +18,7 @@
 					</ul>
 					<strong ng-show="nodes.results.length == 0">No Data</strong>
 			    </uib-tab>
-			    <uib-tab heading="Public" classes="btn-sm" select="tabChange('public')">
+			    <uib-tab index="'public'" heading="Public" classes="btn-sm" select="tabChange('public')">
 			    	<ul class="nodes">
 					    <li ng-repeat="node in nodes.results">
 					        <div><a href="#/nodes/view/{{node.id}}">{{node.label}}</a></div>
@@ -26,7 +26,7 @@
 					</ul>
 					<strong ng-show="nodes.results.length == 0">No Data</strong>
 			    </uib-tab>
-			    <uib-tab heading="Private" classes="btn-sm" select="tabChange('private')">
+			    <uib-tab index="'private'" heading="Private" classes="btn-sm" select="tabChange('private')">
 			    	<ul class="nodes">
 					    <li ng-repeat="node in nodes.results">
 					        <div><a href="#/nodes/view/{{node.id}}">{{node.label}}</a></div>
@@ -34,7 +34,7 @@
 					</ul>
 					<strong ng-show="nodes.results.length == 0">No Data</strong>
 			    </uib-tab>
-			    <uib-tab heading="Global" classes="btn-sm" select="tabChange('global')">
+			    <uib-tab index="'global'" heading="Global" classes="btn-sm" select="tabChange('global')">
 			    	<ul class="nodes">
 					    <li ng-repeat="node in nodes.results">
 					        <div><a href="#/nodes/view/{{node.id}}">{{node.label}}</a></div>

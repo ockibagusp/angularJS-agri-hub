@@ -2,13 +2,15 @@
 <div class="container">
     <div breadcrumb title="{{ is_new ? 'New Node' : 'Edit Node' }}" links="links"></div>
     <div class="row-fluid">
+        <div ng-repeat="error in errors">
+            <div class="alert alert-danger" role="alert" ng-show="errors">
+                <strong>{{ error.field }}</strong>: {{ error.message }}
+            </div>
+        </div>
         <div ng-show="node.is_public" uib-alert class="alert-warning">
             <strong>Important!</strong> Your sensor datas will be visible by another.
         </div>
         <div class="col-md-6">
-            <ul ng-repeat="error in errors">
-                <li style="color: red">{{ error.field}} -> {{ error.message }}</li>
-            </ul>
             <form name="nodeForm" ng-submit="save()" class="form-horizontal">
                 <div class="form-group">
                     <label class="control-label" for="label">Label:</label>

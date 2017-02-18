@@ -77,11 +77,8 @@ app.controller('SensorNewCtrl',
                 function(response) {
                     $location.path("/nodes/" + $scope.node.id + "/sensors/index");
                 },
-                function(error) {
-                    console.log(error)
-                    $scope.errors = [
-                        {field: "label", message: error.data.label[0]}
-                    ];
+                function(errors) {
+                    $scope.errors = extractErrors(errors.data);
                 }
             );
         };
@@ -112,9 +109,29 @@ app.controller('SensorEditCtrl',
             });
         });
         $scope.save = function() {
-            Sensors.save($scope.node, $scope.sensor).then(function() {
-                $location.path("/nodes/" + $scope.node.id + "/sensors/index");
-            });
+            Sensors.save($scope.node, $scope.sensor).then(
+                function() {
+                    $location.path("/nodes/" + $scope.node.id + "/sensors/index");
+                },
+                function(errors) {
+                    $scope.errors = extractErrors(errors.data);
+                }
+            );
         };
     }
 );
+
+function extractErrors(errorsParse) {
+    var errors = [];
+    for(let index in errorsParse) {
+        console.log(index)
+        if(errorsParse.hasOwnProperty(index)) {
+            errors.push({
+                field: index,
+                message: typeof errorsParse[index] === 'string' ? 
+                    errorsParse[index]: errorsParse[index][0]
+            })
+        }
+    }
+    return errors;
+}

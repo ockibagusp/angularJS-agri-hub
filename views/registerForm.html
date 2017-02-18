@@ -48,11 +48,12 @@
 </style>
 
 <div class="container">
-    <div butterbar>Loading...</div>
     <form class="form-signin" name="registerForm" ng-submit="submit()" ng-controller="RegisterCtrl">
         <h2 class="form-signin-heading">Register Form</h2>
-        <div class="alert alert-danger" role="alert" ng-show="error">
-            <span ng-bind="error"></span>
+        <div ng-repeat="error in errors">
+            <div class="alert alert-danger" role="alert" ng-show="errors">
+                <strong>{{ error.field }}</strong>: {{ error.message }}
+            </div>
         </div>
         <label class="sr-only">Username</label>
         <input type="text" class="form-control" placeholder="Username" ng-model="user.username"

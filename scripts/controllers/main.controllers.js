@@ -46,7 +46,6 @@ app.controller('LoginCtrl',
                     }
                 },
                 function error(errorResponse) {
-                    // console.log("Error:" + JSON.stringify(errorResponse));
                     $scope.error = errorResponse.data.__all__;
                 }
             );
@@ -76,8 +75,7 @@ app.controller('RegisterCtrl',
                     $location.path('/login');
                 },
                 function error(errorResponse) {
-                    // console.log("Error:" + JSON.stringify(errorResponse));
-                    $scope.error = errorResponse.data.__all__;
+                    $scope.errors = extractErrors(errorResponse.data);
                 }
             );
         }
@@ -90,3 +88,18 @@ app.controller('LogoutCtrl',
         $location.path('/login');
     }
 );
+
+function extractErrors(errorsParse) {
+    var errors = [];
+    for(let index in errorsParse) {
+        console.log(index)
+        if(errorsParse.hasOwnProperty(index)) {
+            errors.push({
+                field: index,
+                message: typeof errorsParse[index] === 'string' ? 
+                    errorsParse[index]: errorsParse[index][0]
+            })
+        }
+    }
+    return errors;
+}

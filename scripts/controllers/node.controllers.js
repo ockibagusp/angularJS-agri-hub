@@ -77,9 +77,14 @@ app.controller('NodeEditCtrl',
         });
         $scope.save = function() {
             $scope.node.is_public = $scope.node.is_public ? 1 : 0;
-            Nodes.save($scope.node).then(function() {
-                $location.path('/nodes/index');
-            });
+            Nodes.save($scope.node).then(
+                function(response) {
+                    $location.path('/nodes/index');
+                },
+                function(errors) {
+                    $scope.errors = extractErrors(errors.data);
+                }
+            );
         };
     }
 );
@@ -111,17 +116,25 @@ app.controller('NodeNewCtrl',
                 function(response) {
                     $location.path('/nodes/index');
                 },
-                function(error) {
-                    var errors = [];
-                    angular.forEach(error.data, function(value, key) {
-                        this.push({
-                            field: key,
-                            message: value[0]
-                        });
-                    }, errors);
-                    $scope.errors = errors;
+                function(errors) {
+                    $scope.errors = extractErrors(errors.data);
                 }
             );
         };
     }
 );
+
+function extractErrors(errorsParse) {
+    var errors = [];
+    for(let index in errorsParse) {
+        console.log(index)
+        if(errorsParse.hasOwnProperty(index)) {
+            errors.push({
+                field: index,
+                message: typeof errorsParse[index] === 'string' ? 
+                    errorsParse[index]: errorsParse[index][0]
+            })
+        }
+    }
+    return errors;
+}

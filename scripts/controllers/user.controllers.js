@@ -61,9 +61,14 @@ app.controller('UserEditCtrl',
         });
         $scope.save = function() {
             $scope.user.is_admin = $scope.user.is_admin ? 1 : 0;
-            Users.save($scope.user).then(function() {
-                $location.path('/users/index');
-            });
+            Users.save($scope.user).then(
+                function() {
+                    $location.path('/users/index');
+                },
+                function(errors) {
+                    $scope.errors = extractErrors(errors.data);
+                }
+            );
         };
     }
 );
@@ -90,17 +95,25 @@ app.controller('UserNewCtrl',
                 function(response) {
                     $location.path('/users/index');
                 },
-                function(error) {
-                    var errors = [];
-                    angular.forEach(error.data, function(value, key) {
-                        this.push({
-                            field: key,
-                            message: value[0]
-                        });
-                    }, errors);
-                    $scope.errors = errors;
+                function(errors) {
+                    $scope.errors = extractErrors(errors.data);
                 }
             );
         };
     }
 );
+
+function extractErrors(errorsParse) {
+    var errors = [];
+    for(let index in errorsParse) {
+        console.log(index)
+        if(errorsParse.hasOwnProperty(index)) {
+            errors.push({
+                field: index,
+                message: typeof errorsParse[index] === 'string' ? 
+                    errorsParse[index]: errorsParse[index][0]
+            })
+        }
+    }
+    return errors;
+}

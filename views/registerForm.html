@@ -34,14 +34,14 @@
         z-index: 2;
     }
 
-    .form-signin input[type="email"] {
+    .form-signin input[type="text"] {
         margin-bottom: -1px;
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
     }
-    
+
     .form-signin input[type="password"] {
-        margin-bottom: 10px;
+        margin-bottom: -1px;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
     }
@@ -49,8 +49,8 @@
 
 <div class="container">
     <div butterbar>Loading...</div>
-    <form class="form-signin" name="loginForm" ng-submit="submit()" ng-controller="LoginCtrl">
-        <h2 class="form-signin-heading">Please sign in</h2>
+    <form class="form-signin" name="registerForm" ng-submit="submit()" ng-controller="RegisterCtrl">
+        <h2 class="form-signin-heading">Register Form</h2>
         <div class="alert alert-danger" role="alert" ng-show="error">
             <span ng-bind="error"></span>
         </div>
@@ -59,12 +59,16 @@
          focus required>
         <label class="sr-only">Password</label>
         <input type="password" ng-model="user.password" class="form-control" placeholder="Password" focus required>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <a href="#/register" class="btn btn-lg btn-success btn-block">Register</a>
+        <label class="sr-only">Email</label>
+        <input type="email" ng-model="user.email" class="form-control" 
+            placeholder="Email" name="email" required>
+        <label class="sr-only">First name</label>
+        <input type="text" ng-model="user.first_name" class="form-control" 
+            placeholder="First name" name="first_name" required>
+        <label class="sr-only">Last name</label>
+        <input type="text" ng-model="user.last_name" class="form-control" 
+            placeholder="Last name" name="last_name" required>
+        <button class="btn btn-lg btn-success btn-block" type="submit" style="margin-top: 10px">Register</button>
+        <a href="#/login" class="btn btn-lg btn-primary btn-block">Sign in</a>
     </form>
 </div>

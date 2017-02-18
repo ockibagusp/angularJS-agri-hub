@@ -18,7 +18,7 @@ app.controller('MainCtrl',
 app.controller('LoginCtrl',
     function($scope, $location, $window, Login, setCreds, checkCreds) {
         if (checkCreds.isAuth()) {
-            $location.path('/nodes/index');
+            $location.path('/');
         }
 
         // default
@@ -44,6 +44,36 @@ app.controller('LoginCtrl',
                     } else {
                         $scope.error = 'Login Failed';
                     }
+                },
+                function error(errorResponse) {
+                    // console.log("Error:" + JSON.stringify(errorResponse));
+                    $scope.error = errorResponse.data.__all__;
+                }
+            );
+        }
+    }
+);
+
+app.controller('RegisterCtrl',
+    function($scope, $location, Register, checkCreds) {
+        if (checkCreds.isAuth()) {
+            $location.path('/');
+        }
+
+        // default
+        $scope.user = {
+            'username': 'milea',
+            'password': '',
+            'email': 'milea@example.com',
+            'first_name': 'Milea Adnan',
+            'last_name': 'Nasution'
+        };
+
+        $scope.submit = function () {
+
+            Register.register({}, $scope.user,
+                function success(response) {
+                    $location.path('/login');
                 },
                 function error(errorResponse) {
                     // console.log("Error:" + JSON.stringify(errorResponse));

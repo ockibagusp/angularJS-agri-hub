@@ -140,3 +140,11 @@ services.factory('Login', ['$resource',
         });
     }]
 );
+
+services.factory('Register', ['$resource',
+    function($resource) {
+        return $resource(apiurl + "/register/", {}, {
+            register: {method: 'POST', cache: false, isArray: false}            
+        });
+    }]
+);

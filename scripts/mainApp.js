@@ -15,6 +15,9 @@ app.config(['$routeProvider', function ($routeProvider) {
     }).when('/login', {
         controller: 'LoginCtrl',
         templateUrl: 'views/loginForm.html'
+    }).when('/register', {
+        controller: 'RegisterCtrl',
+        templateUrl: 'views/registerForm.html'
     }).when('/logout', {
         controller: 'LogoutCtrl',
         template: ' '

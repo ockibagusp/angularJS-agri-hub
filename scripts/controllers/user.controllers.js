@@ -19,9 +19,6 @@ app.controller('UserListCtrl',
     		$scope.users = users;
             $scope.tabChange = function(type) {
                 $location.search('type', type);
-                Users.query(type).success(function (users) {
-                    $scope.users = users;
-                });
             }
     	});
 	}

@@ -19,9 +19,6 @@ app.controller('NodeListCtrl',
             $scope.nodes = data;
             $scope.tabChange = function(role) {
                 $location.search('visibility', role);
-                Nodes.query(role).success(function (data) {
-                    $scope.nodes = data;
-                });
             }
         })
     }

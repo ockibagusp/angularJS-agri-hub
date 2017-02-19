@@ -1,8 +1,9 @@
 'use strict';
 
-var app = angular.module('agrihub',
-    ['ngRoute', 'ui.bootstrap', 'agrihub.directives', 'agrihub.services', 'agrihub.authenticate']
-);
+var app = angular.module('agrihub', [
+    'ngRoute', 'ui.bootstrap', 'agrihub.directives', 
+    'agrihub.services', 'agrihub.authenticate', 'agrihub.access-control'
+]);
 
 app.config(function($resourceProvider) {
   $resourceProvider.defaults.stripTrailingSlashes = false;

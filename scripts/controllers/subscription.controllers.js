@@ -1,9 +1,8 @@
 'use strict';
 
 app.controller('SubscriptionsListUserCtrl', 
-    function($scope, $location, Subscriptions, checkCreds) {
-        if (!checkCreds.isAuth()) {
-            $location.path('/login');
+    function($scope, $location, Subscriptions, researcherRequired) {
+        if(!researcherRequired()) {
             return;
         }
 
@@ -28,9 +27,8 @@ app.controller('SubscriptionsListUserCtrl',
 );
 
 app.controller('SubscriptionsListNodeCtrl', 
-    function($scope, $routeParams, $location, Subscriptions, Nodes, checkCreds) {
-        if (!checkCreds.isAuth()) {
-            $location.path('/login');
+    function($scope, $routeParams, $location, Subscriptions, Nodes, researcherRequired) {
+        if(!researcherRequired()) {
             return;
         }
 
@@ -60,9 +58,9 @@ app.controller('SubscriptionsListNodeCtrl',
 );
 
 app.controller('SubscriptionsListNodeSensorCtrl',
-    function($scope, $routeParams, $location, Subscriptions, Nodes, Sensors, checkCreds) {
-        if (!checkCreds.isAuth()) {
-            $location.path('/login');
+    function($scope, $routeParams, $location, Subscriptions, Nodes, Sensors, researcherRequired) {
+        if(!researcherRequired()) {
+            return;
         }
 
         Nodes.get($routeParams.node).success(function (data) {

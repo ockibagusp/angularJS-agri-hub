@@ -1,9 +1,8 @@
 'use strict';
 
 app.controller('UserListCtrl', 
-	function ($scope, $location, Users, checkCreds, getCreds) {
-		if (!checkCreds.isAuth()) {
-        	$location.path('/login');
+	function ($scope, $location, Users, adminRequired) {
+		if (!adminRequired()) {
         	return;
     	}
 
@@ -29,7 +28,11 @@ app.controller('UserListCtrl',
 );
 
 app.controller('UserViewCtrl',
-    function($scope, $routeParams, $location, Users, getCreds) {
+    function($scope, $routeParams, $location, Users, adminRequired) {
+        if (!adminRequired()) {
+            return;
+        }
+
         Users.get($routeParams.userId).success(function (user) {
             $scope.user = user;
             // breadcrumb
@@ -47,7 +50,11 @@ app.controller('UserViewCtrl',
 );
 
 app.controller('UserEditCtrl',
-    function($scope, $routeParams, $location, Users) {
+    function($scope, $routeParams, $location, Users, adminRequired) {
+        if (!adminRequired()) {
+            return;
+        }
+
         Users.get($routeParams.userId).success(function (user) {
             $scope.user = user;
             $scope.user.is_admin = $scope.user.is_admin ? true : false;
@@ -74,7 +81,11 @@ app.controller('UserEditCtrl',
 );
 
 app.controller('UserNewCtrl',
-    function($scope, $location, Users) {
+    function($scope, $location, Users, adminRequired) {
+        if (!adminRequired()) {
+            return;
+        }
+        
         $scope.is_new = true;
         $scope.user = {
             'username': "milea",

@@ -1,9 +1,8 @@
 'use strict';
 
 app.controller('NodeListCtrl', 
-    function($scope, $location, Nodes, checkCreds) {
-        if (!checkCreds.isAuth()) {
-            $location.path('/login');
+    function($scope, $location, Nodes, researcherRequired) {
+        if(!researcherRequired()) {
             return;
         }
 
@@ -29,7 +28,11 @@ app.controller('NodeListCtrl',
 );
 
 app.controller('NodeViewCtrl',
-    function($scope, $routeParams, $location, Nodes, getCreds) {
+    function($scope, $routeParams, $location, Nodes, researcherRequired, getCreds) {
+        if(!researcherRequired()) {
+            return;
+        }
+
         Nodes.get($routeParams.nodeId).success(function (node) {
             $scope.node = node;
             $scope.is_mine = (node.user == getCreds.user.username);
@@ -48,7 +51,11 @@ app.controller('NodeViewCtrl',
 );
 
 app.controller('NodeEditCtrl',
-    function($scope, $routeParams, $location, Nodes, getCreds) {
+    function($scope, $routeParams, $location, Nodes, researcherRequired, getCreds) {
+        if(!researcherRequired()) {
+            return;
+        }
+
         Nodes.get($routeParams.nodeId).success(function (node) {
             $scope.node = node;
             // raise 403 when node is not owned by this auth user
@@ -90,7 +97,11 @@ app.controller('NodeEditCtrl',
 );
 
 app.controller('NodeNewCtrl',
-    function($scope, $location, Nodes) {
+    function($scope, $location, Nodes, researcherRequired) {
+        if(!researcherRequired()) {
+            return;
+        }
+        
         $scope.is_new = true;
         $scope.node = {
             'label': "FILKOM_1",

@@ -1,9 +1,8 @@
 'use strict';
 
 app.controller('SensorListCtrl', 
-    function($scope, $routeParams, $location, Nodes, Sensors, checkCreds, getCreds) {
-        if (!checkCreds.isAuth()) {
-            $location.path('/login');
+    function($scope, $routeParams, $location, Nodes, Sensors, researcherRequired, getCreds) {
+        if(!researcherRequired()) {
             return;
         }
 
@@ -25,7 +24,11 @@ app.controller('SensorListCtrl',
 );
 
 app.controller('SensorViewCtrl',
-    function($scope, $routeParams, $location, Nodes, Sensors, getCreds) {
+    function($scope, $routeParams, $location, Nodes, Sensors, researcherRequired, getCreds) {
+        if(!researcherRequired()) {
+            return;
+        }
+
         Nodes.get($routeParams.nodeId).success(function (node) {
             $scope.nodeid = node.id;
             $scope.is_mine = (node.user == getCreds.user.username);
@@ -52,7 +55,11 @@ app.controller('SensorViewCtrl',
 );
 
 app.controller('SensorNewCtrl', 
-    function($scope, $routeParams, $location, Nodes, Sensors, getCreds) {
+    function($scope, $routeParams, $location, Nodes, Sensors, researcherRequired, getCreds) {
+        if(!researcherRequired()) {
+            return;
+        }
+
         $scope.is_new = true;
         Nodes.get($routeParams.nodeId).success(function (node) {
             $scope.node = node;
@@ -86,7 +93,11 @@ app.controller('SensorNewCtrl',
 );
 
 app.controller('SensorEditCtrl',
-    function($scope, $routeParams, $location, Nodes, Sensors, getCreds) {
+    function($scope, $routeParams, $location, Nodes, Sensors, researcherRequired, getCreds) {
+        if(!researcherRequired()) {
+            return;
+        }
+        
         Nodes.get($routeParams.nodeId).success(function (node) {
             $scope.node = node;
             // raise 403 when node is not owned by this auth user

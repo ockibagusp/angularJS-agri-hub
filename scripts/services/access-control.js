@@ -17,9 +17,12 @@ authenticate.factory('adminRequired', ['$location', 'checkCreds',
         return function() {
         	if (!checkCreds.isAuth()) {
                 $location.path('/404');
+                return false;
             } else if (!checkCreds.isAdmin()) {
                 $location.path('/403');
+                return false;
             }
+            return true;
         }
     }
 ]);

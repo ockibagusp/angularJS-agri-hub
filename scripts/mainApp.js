@@ -1,7 +1,7 @@
 'use strict';
 
 var app = angular.module('agrihub', [
-    'ngRoute', 'ui.bootstrap', 'agrihub.directives', 
+    'ngRoute', 'ui.bootstrap', 'angularjs-datetime-picker', 'agrihub.directives', 
     'agrihub.services', 'agrihub.authenticate', 'agrihub.access-control'
 ]);
 

@@ -87,14 +87,23 @@ services.factory('Subscriptions', ['$http', 'getCreds',
                     return $http.put(url, book, options);
                 }
             },
-            filterbyuser: function (page=1) {
-                return $http.get(basenodeurl + '/user/' + getCreds.user.username + '/?page=' + page, options);
+            filterbyuser: function (page=1, date_start="", date_end="") {
+                var filter = getFilterQuery(date_start, date_end);
+                return $http.get(
+                    basenodeurl + '/user/' + getCreds.user.username + '/?page=' + page + filter, options
+                );
             },
-            filterbynode: function (node, page=1) {
-                return $http.get(basenodeurl + '/node/' + node + '/?page=' + page, options);
+            filterbynode: function (node, page=1, date_start="", date_end="") {
+                var filter = getFilterQuery(date_start, date_end);
+                return $http.get(
+                    basenodeurl + '/node/' + node + '/?page=' + page + filter, options
+                );
             },
-            filterbynodesensor: function (node, sensor, page=1) {
-                return $http.get(basenodeurl + '/node/' + node + '/sensor/' + sensor + '/?page=' + page, options);
+            filterbynodesensor: function (node, sensor, page=1, date_start="", date_end="") {
+                var filter = getFilterQuery(date_start, date_end);
+                return $http.get(
+                    basenodeurl + '/node/' + node + '/sensor/' + sensor + '/?page=' + page + filter, options
+                );
             }
         } 
     }]
@@ -148,3 +157,15 @@ services.factory('Register', ['$resource',
         });
     }]
 );
+
+function getFilterQuery(date_start="", date_end="") {
+    var filter = "";
+    if (date_start) {
+        filter += '&&start=' + date_start;
+    }
+
+    if (date_end) {
+        filter += '&&end=' + date_end;
+    }
+    return filter;
+}
